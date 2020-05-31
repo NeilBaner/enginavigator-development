@@ -4,6 +4,9 @@ const url = require('url');
 const os = require('os');
 
 const server = http.createServer();
+
+require('./httpsniffer.js').sniffOn(server);
+
 server.on('request', (req, res) => {
     var requrl = url.parse(req.url, true);
     if (requrl.pathname === '/') {
