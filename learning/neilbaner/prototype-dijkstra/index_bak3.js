@@ -4,14 +4,14 @@ const dbPassword = 'hunter2';
 const dbDbName = 'graph_test';
 
 let sql = require('mysql');
-let util = require('util');
 let conn = sql.createConnection({
     host: dbURI,
     user: dbUsername,
     password: dbPassword,
     database: dbDbName
 });
-let sqlQuery = util.promisify(conn.query);
+
+
 
 class Graph {
     constructor() {
@@ -72,16 +72,26 @@ class Node {
 
 async function populateGraph() {
     let graph = new Graph();
-    result = sqlQuery('SELECT * FROM nodes');
-    for(let node of results){
-        graph.addNode(node);
-    }
-    result = await sqlQuery('SELECT * FROM edges');
-    for(let edge of results){
-        graph.addEdge(edge);
-    }
-    graph.printGraph();
+    conn.query('SELECT * FROM nodes;', (err, result, fields) => {
+        if (err) {
+            throw err;
+        }
+        result.forEach((node) => {
+            graph.addNode(new Node(node.node_id, node.floor, node.block, node.name));
+        });
+    });
+    conn.query('SELECT * FROM edges;', (err, result, fields) => {
+        if (err) {
+            throw err;
+        }
+        result.forEach((edge) => {
+            graph.addEdge(new Edge(edge.edge_id, edge.start, edge.end, edge.weight, edge.stairs));
+        });
+        graph.shortestPath(1, 2);
+    });
 }
 
 populateGraph();
+
+
 
