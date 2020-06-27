@@ -1,0 +1,15 @@
+{
+  "name": "chap05",
+  "version": "1.0.0",
+  "description": "",
+  "main": "2files.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "co": "^4.6.0",
+    "fs-extra": "^9.0.1"
+  }
+}
