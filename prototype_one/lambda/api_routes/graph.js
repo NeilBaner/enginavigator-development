@@ -1,16 +1,38 @@
+class Node{
+    constructor(id, distance){
+        this.id = id;
+        this.distance = distance;
+    }
+}
+
 class Graph {
     constructor(){
         nodes = [];
+        matrix = [];
         edges = [];
     }
     addNode(node){
-        nodes[node.id] = node;
+        nodes[node.id] = new Node(node.id, 2048);
     }
     addEdge(edge){
-        edges[edge.start].push(edge);
+        edges.push(edge);
+        matrix[edge.start][edge.end] = edge.weight;
     }
     dijkstra(start, end){
-        
+        let visited = [];
+        queue = new PriorityQueue();
+        let startNode = new Node(start, 0);
+        visited[start] = 0;
+        let current = startNode;
+        while(queue.size > 0){
+            matrix[current.id].forEach(element =>{
+                if(visited[current.id] == 0){
+                    visited[current.id] = 1;
+                    queue.enqueue(element);
+                }
+            });
+            current = queue.dequeue();
+        }
     }
 }
 
@@ -21,7 +43,7 @@ class PriorityQueue {
     }
     bubbleUp(index) {
         let current = index;
-        while (queue[current].weight < queue[(current / 2) - 1].weight) {
+        while (queue[current].distance < queue[(current / 2) - 1].distance) {
             let temp = queue[current];
             queue[current] = queue[(current / 2) - 1];
             queue[(current / 2) - 1] = temp;
@@ -30,8 +52,8 @@ class PriorityQueue {
     }
     bubbleDown(index) {
         let current = index;
-        while (queue[current].weight > queue[(current * 2) + 1].weight || queue[current].weight > queue[(current * 2) + 2].weight) {
-            if (queue[(current * 2) + 1].weight > queue[(current * 2) + 2].weight) {
+        while (queue[current].distance > queue[(current * 2) + 1].distance || queue[current].distance > queue[(current * 2) + 2].distance) {
+            if (queue[(current * 2) + 1].distance > queue[(current * 2) + 2].distance) {
                 let temp = queue[current];
                 queue[current] = queue[(current * 2) + 1];
                 queue[(current * 2) + 1] = temp;
@@ -56,5 +78,8 @@ class PriorityQueue {
         queue[size] = null;
         this.bubbleDown(0);
         return toReturn;
+    }
+    decreaseKey(index){
+
     }
 }
