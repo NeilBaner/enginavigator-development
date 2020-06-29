@@ -12,11 +12,20 @@ Use the following URL https://0997tcpnme.execute-api.us-east-1.amazonaws.com/tes
 
 * eg: https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/nodes?type=search&key=E1
 
+Result:
+
+![search_screenshot](https://github.com/neilbaner/enginavigator/screenshot_search_location.png)
+
 * eg: https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/nodes?type=retrieve&key=4
+
+Result:
+
+![retrieve_screenshot](https://github.com/neilbaner/enginavigator/screenshot_retrieve_location.png)
 
 ## Getting a route
 
 Use the following URL https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/routes
+
 
 ### Parameters:
 
@@ -25,3 +34,7 @@ Use the following URL https://0997tcpnme.execute-api.us-east-1.amazonaws.com/tes
 * end: id of the ending location/node
 
 * eg: https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/routes?start=2&end=5
+
+Result:
+
+![route_screenshot](https://github.com/neilbaner/enginavigator/screenshot_get_route.png)
