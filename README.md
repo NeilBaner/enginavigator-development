@@ -73,4 +73,8 @@ No one likes being late to class, whether as a student or a teacher. Sometimes, 
 
 ![meme-software-engineer](https://github.com/NeilBaner/enginavigator/blob/master/meme-2.jpg)
 
-2. We now have a (somewhat) functional back end. We have an API, accessible at [this link](https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/) which allows us to search for locations and then get a route from one location to another. Instructions for how to use this API are available [here](https://github.com/neilbaner/enginavigator/api_instructions.md), feel free to test it out!
+2. We now have a (somewhat) functional back end. We have an API, accessible at [this link](https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/) which allows us to search for locations and then get a route from one location to another. Instructions for how to use this API are available [here](https://github.com/neilbaner/enginavigator/blob/master/api_instructions.md), feel free to test it out!
+
+Here is the sample map we're using for the prototype:
+
+![sample-map](https://github.com/NeilBaner/enginavigator/blob/master/prototype_one_map.jpg)
