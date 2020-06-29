@@ -14,13 +14,13 @@ Use the following URL https://0997tcpnme.execute-api.us-east-1.amazonaws.com/tes
 
 Result:
 
-![search_screenshot](https://github.com/neilbaner/enginavigator/screenshot_search_location.png)
+![search_screenshot](https://github.com/neilbaner/enginavigator/blob/master/screenshot_search_location.png)
 
 * eg: https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/nodes?type=retrieve&key=4
 
 Result:
 
-![retrieve_screenshot](https://github.com/neilbaner/enginavigator/screenshot_retrieve_location.png)
+![retrieve_screenshot](https://github.com/neilbaner/enginavigator/blob/master/screenshot_retrieve_location.png)
 
 ## Getting a route
 
@@ -37,4 +37,4 @@ Use the following URL https://0997tcpnme.execute-api.us-east-1.amazonaws.com/tes
 
 Result:
 
-![route_screenshot](https://github.com/neilbaner/enginavigator/screenshot_get_route.png)
+![route_screenshot](https://github.com/neilbaner/enginavigator/blob/master/screenshot_get_route.png)
