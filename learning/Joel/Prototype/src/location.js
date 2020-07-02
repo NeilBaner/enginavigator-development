@@ -4,4 +4,4 @@ LT3
 LT4
 LT5
 LT6
-Rise N Shine`.split('\n');
+Arise N Shine`.split('\n');
