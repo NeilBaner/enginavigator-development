@@ -6,7 +6,7 @@ Use the following URL https://0997tcpnme.execute-api.us-east-1.amazonaws.com/tes
 
 ### Parameters:
 
-* type: Either "search" or "retrieve". "search" means you are searching for locations matching a text string, to be put into the key parameter. "retrieve" means you want to retrieve the details of a particular node with a specific id, given in the key parameter. 
+* type: Either "search", "list", or "retrieve". "search" means you are searching for locations matching a text string, to be put into the key parameter. "list" means you want to get every single node in the map for some reason. (this will only return a list of names + IDs). "retrieve" means you want to retrieve the details of a particular node with a specific id, given in the key parameter. 
 
 * key: Either the search key if the type is "search" or an integer if the type is "retrieve". See above for more details.
 
