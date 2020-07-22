@@ -8,53 +8,28 @@ const pool = mysql.createPool({
     database: config.dbname
 });
 
-class PriorityQueue{
-    
-}
-
-class Graph {
-    constructor(){
-        this.nodes = [];
-        this.adjacencyList = {};
-    }
-    addNode(node){
-        this.nodes.push(node);
-        this.adjacencyMatrix[node] = [];
-    }
-    addEdge(start, end, weight){
-        if(!this.nodes.includes(start)){
-            this.nodes.push(start);
-        }
-        if(!this.nodes.includes(end)){
-            this.nodes.push(end);
-        }
-        this.adjacencyMatrix[start][end] = weight;
-    }
-
-}
-
 exports.handler = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
-    let sqlString = "SELECT * FROM edges";
-    let start, end;
-    let map = Graph();
-    try {
-        start = parseInt(event.params.querystring.start);
-        end = parseInt(event.params.querystring.end);
-    } catch (err) {
-        callback(null, "Bad Request: Start and End should be integers.");
+    let sqlString;
+    if (event.params.querystring.type == "search") {
+        sqlString = "SELECT * FROM vertices WHERE vertex_hidden = 0 AND vertex_name LIKE '%"
+            + event.params.querystring.key + "%';";
+    } else if (event.params.querystring.type == "retrieve") {
+        sqlString = "SELECT * FROM vertices WHERE vertex_id = " + event.params.querystring.key + ";";
+    } else if (event.params.querystring.type == "list"){
+        sqlString = "SELECT vertex_id, vertex_name FROM vertices WHERE vertex_hidden = 0";
+    } else {
+        callback(null, "Bad Request: Type should be \"search\" or \"retrieve\".");
     }
     pool.getConnection((err, connection) => {
         if (err) {
             callback(null, "Error getting connection: \n" + err);
-        } else {
+        }else{
             connection.query(sqlString, (err, results, fields) => {
                 if (err) {
                     callback(null, "Error making query: \n" + err);
                 } else {
-                    results.forEach(element => {
-                        map.addEdge(element.edge_start, element.edge_end, element.edge_weight);
-                    });
+                    callback(null, results);
                 }
             });
         }
