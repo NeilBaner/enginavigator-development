@@ -20,6 +20,7 @@ class TextField extends Component {
 
   //expression works well :)
   updateText() {
+    this.setState({ directions: ["Loading Directions..."] });
     https.get(
       `https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/routes?start=${this.state.start}&end=${this.state.end}`,
       (resp) => {
@@ -50,6 +51,7 @@ class TextField extends Component {
           });
           resp.on("end", () => {
             //passes an array of string, state changes to array of locations given by the API
+            console.log(data);
             this.setState({
               location: JSON.parse(data).map((obj) => {
                 return obj.vertex_name;
@@ -65,13 +67,23 @@ class TextField extends Component {
 
   renderDirections() {
     const { directions } = this.state;
-    return (
-      <ul>
-        {directions.map((location) => (
-          <li>{location}</li>
-        ))}
-      </ul>
-    );
+    if (directions.length == 1) {
+      return (
+        <ul>
+          {directions.map((location) => (
+            <li>{location}</li>
+          ))}
+        </ul>
+      );
+    } else {
+      return (
+        <ol>
+          {directions.map((location) => (
+            <li>{location}</li>
+          ))}
+        </ol>
+      );
+    }
   }
 
   updateStartPoint(text) {
@@ -88,19 +100,38 @@ class TextField extends Component {
     console.log(this.state.textStart);
     console.log(this.state.textEnd);
 
-    if (this.state.textStart === "E1-01-01") this.setState({ start: 1 });
-    else if (this.state.textStart === "E1-01-02") this.setState({ start: 2 });
-    else if (this.state.textStart === "E1-01-03") this.setState({ start: 3 });
-    else if (this.state.textStart === "E1-01-04") this.setState({ start: 4 });
-    else if (this.state.textStart === "E1-01-05") this.setState({ start: 5 });
-    else if (this.state.textStart === "E1-01-06") this.setState({ start: 6 });
-
-    if (this.state.textEnd === "E1-01-01") this.setState({ end: 1 });
-    else if (this.state.textEnd === "E1-01-02") this.setState({ end: 2 });
-    else if (this.state.textEnd === "E1-01-03") this.setState({ end: 3 });
-    else if (this.state.textEnd === "E1-01-04") this.setState({ end: 4 });
-    else if (this.state.textEnd === "E1-01-05") this.setState({ end: 5 });
-    else if (this.state.textEnd === "E1-01-06") this.setState({ end: 6 });
+    if (this.state.textEnd != "" && this.state.textStart != "") {
+      https.get("https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/nodes?type=search&key=" + this.state.textStart, (resp) => {
+        let data = "";
+        resp.on("data", (chunk) => {
+          data += chunk;
+        });
+        resp.on("end", () => {
+          //sets the start point correctly based on the API
+          console.log(data);
+          this.setState({
+            start: JSON.parse(data).map((obj) => {
+              return obj.vertex_id;
+            }),
+          });
+          https.get("https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/nodes?type=search&key=" + this.state.textEnd, (resp) => {
+            let data = "";
+            resp.on("data", (chunk) => {
+              data += chunk;
+            });
+            resp.on("end", () => {
+              //sets the end point correctly based on the API
+              console.log(data);
+              this.setState({
+                end: JSON.parse(data).map((obj) => {
+                  return obj.vertex_id;
+                }),
+              });
+            });
+          });
+        });
+      });
+    }
   }
 
   render() {
@@ -124,6 +155,7 @@ class TextField extends Component {
         <br />
         <button
           onClick={() => {
+            this.checkStartEnd();
             this.updateText();
           }}
           className="btn btn-primary"

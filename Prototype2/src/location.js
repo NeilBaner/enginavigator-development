@@ -23,25 +23,25 @@ https
   )
   .on("error", (err) => {});
 
-https
-  .get(
-    "https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/routes?start=1&end=5",
-    (resp) => {
-      let data = "";
-      resp.on("data", (chunk) => {
-        data += chunk;
-      });
-      resp.on("end", () => {
-        let directions;
-        console.log(JSON.parse(data));
-        directions = JSON.parse(data).map((obj) => {
-          return obj.edge_description;
-        });
+// https
+//   .get(
+//     "https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/routes?start=1&end=5",
+//     (resp) => {
+//       let data = "";
+//       resp.on("data", (chunk) => {
+//         data += chunk;
+//       });
+//       resp.on("end", () => {
+//         let directions;
+//         console.log(JSON.parse(data));
+//         directions = JSON.parse(data).map((obj) => {
+//           return obj.edge_description;
+//         });
 
-        console.log(directions);
-      });
-    }
-  )
-  .on("error", (err) => {});
+//         console.log(directions);
+//       });
+//     }
+//   )
+//   .on("error", (err) => {});
 
 // export default location;
