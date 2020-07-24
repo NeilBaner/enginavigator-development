@@ -30,6 +30,7 @@ class TextField extends Component {
         });
         resp.on("end", () => {
           //passes an array of string, state changes to array of locations given by the API
+          console.log(`Got directions from ${this.state.start} to ${this.state.end}\n ${data}`)
           this.setState({
             directions: JSON.parse(data).map((obj) => {
               return obj.edge_description;
@@ -51,7 +52,7 @@ class TextField extends Component {
           });
           resp.on("end", () => {
             //passes an array of string, state changes to array of locations given by the API
-            console.log(data);
+            console.log(`Got the list of nodes \n${data}`);
             this.setState({
               location: JSON.parse(data)
             });
@@ -94,44 +95,44 @@ class TextField extends Component {
     //this.checkStartEnd();
   }
 
-  checkStartEnd() {
-    console.log(this.state.textStart);
-    console.log(this.state.textEnd);
+  // checkStartEnd() {
+  //   console.log(this.state.textStart);
+  //   console.log(this.state.textEnd);
 
-    if (this.state.textEnd != "" && this.state.textStart != "") {
+  //   if (this.state.textEnd != "" && this.state.textStart != "") {
 
-      https.get("https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/nodes?type=search&key=" + this.state.textStart, (resp) => {
-        let data = "";
-        resp.on("data", (chunk) => {
-          data += chunk;
-        });
-        resp.on("end", () => {
-          //sets the start point correctly based on the API
-          console.log(data);
-          this.setState({
-            start: JSON.parse(data).map((obj) => {
-              return obj.vertex_id;
-            }),
-          });
-          https.get("https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/nodes?type=search&key=" + this.state.textEnd, (resp) => {
-            let data = "";
-            resp.on("data", (chunk) => {
-              data += chunk;
-            });
-            resp.on("end", () => {
-              //sets the end point correctly based on the API
-              console.log(data);
-              this.setState({
-                end: JSON.parse(data).map((obj) => {
-                  return obj.vertex_id;
-                }),
-              });
-            });
-          });
-        });
-      });
-    }
-  }
+  //     https.get("https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/nodes?type=search&key=" + this.state.textStart, (resp) => {
+  //       let data = "";
+  //       resp.on("data", (chunk) => {
+  //         data += chunk;
+  //       });
+  //       resp.on("end", () => {
+  //         //sets the start point correctly based on the API
+  //         console.log(data);
+  //         this.setState({
+  //           start: JSON.parse(data).map((obj) => {
+  //             return obj.vertex_id;
+  //           }),
+  //         });
+  //         https.get("https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/nodes?type=search&key=" + this.state.textEnd, (resp) => {
+  //           let data = "";
+  //           resp.on("data", (chunk) => {
+  //             data += chunk;
+  //           });
+  //           resp.on("end", () => {
+  //             //sets the end point correctly based on the API
+  //             console.log(data);
+  //             this.setState({
+  //               end: JSON.parse(data).map((obj) => {
+  //                 return obj.vertex_id;
+  //               }),
+  //             });
+  //           });
+  //         });
+  //       });
+  //     });
+  //   }
+  // }
 
   render() {
     return (
@@ -154,7 +155,6 @@ class TextField extends Component {
         <br />
         <button
           onClick={() => {
-            this.checkStartEnd();
             this.updateText();
           }}
           className="btn btn-primary"
