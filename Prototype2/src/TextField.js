@@ -31,12 +31,18 @@ class TextField extends Component {
                 });
                 resp.on("end", () => {
                     //passes an array of string, state changes to array of locations given by the API
-                    console.log(`Got directions from ${this.state.start} to ${this.state.end}\n ${data}`)
-                    this.setState({
-                        directions: JSON.parse(data).map((obj) => {
-                            return obj.edge_description;
-                        }),
-                    });
+                    console.log(`Got directions from ${this.state.start} to ${this.state.end}\n ${data}`);
+                    try {
+                        this.setState({
+                            directions: JSON.parse(data).map((obj) => {
+                                return obj.edge_description;
+                            }),
+                        });
+                    } catch (err) {
+                        this.setState({
+                            directions: ["There was an error getting the route you wanted. Sorry :("]
+                        })
+                    }
                 });
             }
         );
@@ -53,9 +59,16 @@ class TextField extends Component {
                 resp.on("end", () => {
                     //passes an array of string, state changes to array of locations given by the API
                     console.log(`Got the list of nodes \n${data}`);
-                    this.setState({
-                        location: JSON.parse(data)
-                    });
+                    try {
+                        this.setState({
+                            location: JSON.parse(data)
+                        });
+                    } catch (err) {
+                        this.setState({
+                            location: ["Error retrieving the locations. Sorry!"]
+                        })
+                    }
+
                 });
             }
         ).on("error", (err) => {
