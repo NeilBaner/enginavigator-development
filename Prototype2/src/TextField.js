@@ -53,9 +53,7 @@ class TextField extends Component {
             //passes an array of string, state changes to array of locations given by the API
             console.log(data);
             this.setState({
-              location: JSON.parse(data).map((obj) => {
-                return obj.vertex_name;
-              }),
+              location: JSON.parse(data)
             });
           });
         }
@@ -70,30 +68,30 @@ class TextField extends Component {
     if (directions.length == 1) {
       return (
         <ul>
-          {directions.map((location) => (
-            <li>{location}</li>
+          {directions.map((inst) => (
+            <li>{inst}</li>
           ))}
         </ul>
       );
     } else {
       return (
         <ol>
-          {directions.map((location) => (
-            <li>{location}</li>
+          {directions.map((inst) => (
+            <li>{inst}</li>
           ))}
         </ol>
       );
     }
   }
 
-  updateStartPoint(text) {
-    this.setState({ textStart: text });
-    this.checkStartEnd();
+  updateStartPoint(vertex) {
+    this.setState({ textStart: vertex.vertex_name, start: vertex.vertex_id });
+    //this.checkStartEnd();
   }
 
-  updateEndPoint(text) {
-    this.setState({ textEnd: text });
-    this.checkStartEnd();
+  updateEndPoint(vertex) {
+    this.setState({ textEnd: vertex.vertex_name, end: vertex.vertex_id });
+    //this.checkStartEnd();
   }
 
   checkStartEnd() {
@@ -101,6 +99,7 @@ class TextField extends Component {
     console.log(this.state.textEnd);
 
     if (this.state.textEnd != "" && this.state.textStart != "") {
+
       https.get("https://0997tcpnme.execute-api.us-east-1.amazonaws.com/testing/nodes?type=search&key=" + this.state.textStart, (resp) => {
         let data = "";
         resp.on("data", (chunk) => {

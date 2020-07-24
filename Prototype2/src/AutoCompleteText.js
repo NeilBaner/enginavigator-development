@@ -7,6 +7,7 @@ class AutoCompleteText extends Component {
     super();
     this.state = {
       text: "",
+      id: 0,
       suggestions: [],
     };
   }
@@ -17,10 +18,8 @@ class AutoCompleteText extends Component {
     if (value.length > 0) {
       const regex = new RegExp(`^${value}`, "i");
       suggestions = this.props.data.location
-        .sort()
-        .filter((v) => regex.test(v));
+        .filter((v) => regex.test(v.vertex_name));
     }
-
     //* change the state of TextField, pass a method to do this
     this.setState({
       text: value,
@@ -31,7 +30,8 @@ class AutoCompleteText extends Component {
   //* pass a method to change the state of text and suggestions
   suggestionSelected(value) {
     this.setState({
-      text: value,
+      text: value.vertex_name,
+      id: value.vertex_id,
       suggestions: [], //wipe the suggestions list when the user selects an item
     });
   }
@@ -50,7 +50,7 @@ class AutoCompleteText extends Component {
               this.props.updatePoint(item);
             }}
           >
-            {item}
+            {item.vertex_name}
           </li>
         ))}
       </ul>
