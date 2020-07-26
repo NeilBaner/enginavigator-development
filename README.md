@@ -78,3 +78,13 @@ No one likes being late to class, whether as a student or a teacher. Sometimes, 
 Here is the sample map we're using for the prototype:
 
 ![sample-map](https://github.com/NeilBaner/enginavigator/blob/master/prototype_one_map.jpg)
+
+## UPDATE: Milestone 3
+
+Our web application includes the feature of providing a set of instructions for students who plan to get from a specific point to another. On the front page, the 2 auto complete search bars enable users to input their desired start and end locations. When the search button is clicked, the API fetches data from the data base correspoinding to the vertex names provided in the search bar with the reespective vertex ids. After which, a set of directions will be produced in the space below the search button.
+
+Simple to use, 3 Simple steps.
+
+Try it here: https://bit.ly/2WSc6zm
+
+Video: https://youtu.be/ppMojLehukI
