@@ -88,3 +88,46 @@ Simple to use, 3 Simple steps.
 Try it here: https://bit.ly/2WSc6zm
 
 Video: https://youtu.be/ppMojLehukI
+
+
+We initially planned to create a monolithic MERN stack application.  
+
+Later we changed plans to use a more microservice-oriented approach 
+
+An API is used to retrieve data from the database and for the route calculation 
+
+The actual web application is built with React.js (using create-react-app and node.js) 
+
+All storage and computation is done on the cloud; with AWS Lambda for the routing algorithm, AWS S3 for images (we weren’t able to implement this for Milestone 3 but are on our way to doing so), AWS API gateway to create the API, AWS RDS for a MySQL database with the map data, Github to host our code, and Heroku to host the final web app.  
+
+The Lambda component was done by Neil using Node.js 
+
+The database system was done by Neil using MySQL (this is the only technology we were familiar with) 
+
+The API, S3, GitHub repository and Heroku were set up by Neil 
+
+The front end was built by Joel, using the React.js framework and the create-react-app tool to create a skeleton file.  
+
+Issues encountered along the way: 
+
+Node.js uses asynchronous functions, which was very unintuitive for me coming from purely synchronous programming languages like C++, Java and Python. This led to many hours troubleshooting why the code wouldn’t work as expected, and finding workarounds to do things that would have been easy with synchronous code. For example, for the routes algorithm, I needed to create a for loop that would retrieve the list of edges for each node using an SQL query. However, because the SQL query function from the MySQL library is asynchronous and doesn’t use the new Promise architecture, I wasn’t able to figure out how to make it work properly, as the for loop would just execute a bunch of queries asynchronously and move on to process the retrieved data even though the queries hadn’t been completed yet and there was no data to process. I’ve currently fixed this by adding a static delay of 2 seconds before starting the processing, but I have read up on how to fix this using the async library (I was unable to implement this in time for Milestone 3). – Neil 
+
+We initially planned on creating our own library for Dijkstra’s algorithm. However, after many, many hours coding and troubleshooting and deleting and rewriting code we decided to use a prebuilt library for the Dijkstra’s algorithm (node-dijkstra from npm). This caused the problem mentioned before about the asynchronous MySQL queries, because of the format in which this library expects to be input the graph. We may consider implementing a customised version of Dijkstra’s algorithm (or perhaps a more advanced one like A*) in the future but it is not in the plans for now.  
+
+We found a bug in the AWS Lambda online code editor where it would sometimes not save all the changes made; for example, if we changed 10 characters and saved, it might save only 5 changed characters. This led to a lot of frustration and wasted time. After the first few times, we did figure out that we should probably save multiple times just to be sure. We also found out that Heroku has an issue where hosting an application made with create-react-app will cause the application to crash on launch. We found a fix on stackoverflow.com that said using the library serve and changing the start script from “react-scripts start” to “serve” would work, and indeed it did. This does appear to be an issue with Heroku, as even the stock, unchanged create-react-app template will not launch correctly.  
+
+Features implemented successfully: 
+
+Search bar for start and end points with suggestions 
+
+Ability to search for routes 
+
+Features not yet implemented: 
+
+Images for the routes (should be implemented within a week or two of Milestone 3 submission). 
+
+Ability to find wheelchair-friendly routes (should be implemented within a couple of days of Milestone 3 submission; in fact, if you’re evaluating this a few days later, our deployment may in fact be updated with this feature. The back end for this feature is already implemented) 
+
+Ability to find landmarks like toilets, food courts, staircases, lifts etc. (We received feedback from our peers that these are actually relatively easy to find anyway, so this is a lower priority for us. We may not implement these features for Orbital unless we have extra time) 
+
+Progressive Web App (we will attempt to finish this for Splashdown)
