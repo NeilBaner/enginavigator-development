@@ -90,15 +90,15 @@ Try it here: https://bit.ly/2WSc6zm
 Video: https://youtu.be/ppMojLehukI
 
 
-*We initially planned to create a monolithic MERN stack application.  
+* We initially planned to create a monolithic MERN stack application.  
 
-*Later we changed plans to use a more microservice-oriented approach 
+* Later we changed plans to use a more microservice-oriented approach 
 
- *An API is used to retrieve data from the database and for the route calculation 
+ * An API is used to retrieve data from the database and for the route calculation 
 
-The actual web application is built with React.js (using create-react-app and node.js) 
+ * The actual web application is built with React.js (using create-react-app and node.js) 
 
-All storage and computation is done on the cloud; with AWS Lambda for the routing algorithm, AWS S3 for images (we weren’t able to implement this for Milestone 3 but are on our way to doing so), AWS API gateway to create the API, AWS RDS for a MySQL database with the map data, Github to host our code, and Heroku to host the final web app.  
+ * All storage and computation is done on the cloud; with AWS Lambda for the routing algorithm, AWS S3 for images (we weren’t able to implement this for Milestone 3 but are on    our way to doing so), AWS API gateway to create the API, AWS RDS for a MySQL database with the map data, Github to host our code, and Heroku to host the final web app.  
 
 The Lambda component was done by Neil using Node.js 
 
