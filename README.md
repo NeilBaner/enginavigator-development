@@ -90,11 +90,11 @@ Try it here: https://bit.ly/2WSc6zm
 Video: https://youtu.be/ppMojLehukI
 
 
-We initially planned to create a monolithic MERN stack application.  
+*We initially planned to create a monolithic MERN stack application.  
 
-Later we changed plans to use a more microservice-oriented approach 
+*Later we changed plans to use a more microservice-oriented approach 
 
-An API is used to retrieve data from the database and for the route calculation 
+ *An API is used to retrieve data from the database and for the route calculation 
 
 The actual web application is built with React.js (using create-react-app and node.js) 
 
