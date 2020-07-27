@@ -90,9 +90,9 @@ Try it here: https://bit.ly/2WSc6zm
 Video: https://youtu.be/ppMojLehukI
 
 
-* We initially planned to create a monolithic MERN stack application.  
+We initially planned to create a monolithic MERN stack application.  
 
-* Later we changed plans to use a more microservice-oriented approach 
+Later we changed plans to use a more microservice-oriented approach 
 
  - An API is used to retrieve data from the database and for the route calculation 
 
@@ -108,7 +108,7 @@ Video: https://youtu.be/ppMojLehukI
 
    * The front end was built by Joel, using the React.js framework and the create-react-app tool to create a skeleton file.  
 
-* Issues encountered along the way: 
+Issues encountered along the way: 
 
  - Node.js uses asynchronous functions, which was very unintuitive for me coming from purely synchronous programming languages like C++, Java and Python. This led to many hours troubleshooting why the code wouldn’t work as expected, and finding workarounds to do things that would have been easy with synchronous code. For example, for the routes algorithm, I needed to create a for loop that would retrieve the list of edges for each node using an SQL query. However, because the SQL query function from the MySQL library is asynchronous and doesn’t use the new Promise architecture, I wasn’t able to figure out how to make it work properly, as the for loop would just execute a bunch of queries asynchronously and move on to process the retrieved data even though the queries hadn’t been completed yet and there was no data to process. I’ve currently fixed this by adding a static delay of 2 seconds before starting the processing, but I have read up on how to fix this using the async library (I was unable to implement this in time for Milestone 3). – Neil 
 
@@ -118,16 +118,16 @@ Video: https://youtu.be/ppMojLehukI
 
 Features implemented successfully: 
 
-Search bar for start and end points with suggestions 
+* Search bar for start and end points with suggestions 
 
-Ability to search for routes 
+* Ability to search for routes 
 
 Features not yet implemented: 
 
-Images for the routes (should be implemented within a week or two of Milestone 3 submission). 
+* Images for the routes (should be implemented within a week or two of Milestone 3 submission). 
 
-Ability to find wheelchair-friendly routes (should be implemented within a couple of days of Milestone 3 submission; in fact, if you’re evaluating this a few days later, our deployment may in fact be updated with this feature. The back end for this feature is already implemented) 
+* Ability to find wheelchair-friendly routes (should be implemented within a couple of days of Milestone 3 submission; in fact, if you’re evaluating this a few days later, our deployment may in fact be updated with this feature. The back end for this feature is already implemented) 
 
-Ability to find landmarks like toilets, food courts, staircases, lifts etc. (We received feedback from our peers that these are actually relatively easy to find anyway, so this is a lower priority for us. We may not implement these features for Orbital unless we have extra time) 
+* Ability to find landmarks like toilets, food courts, staircases, lifts etc. (We received feedback from our peers that these are actually relatively easy to find anyway, so this is a lower priority for us. We may not implement these features for Orbital unless we have extra time) 
 
-Progressive Web App (we will attempt to finish this for Splashdown)
+* Progressive Web App (we will attempt to finish this for Splashdown)
