@@ -131,3 +131,7 @@ Features not yet implemented:
 * Ability to find landmarks like toilets, food courts, staircases, lifts etc. (We received feedback from our peers that these are actually relatively easy to find anyway, so this is a lower priority for us. We may not implement these features for Orbital unless we have extra time) 
 
 * Progressive Web App (we will attempt to finish this for Splashdown)
+
+User Testing
+* Directions provided by the API was still a little unclear, visuals might aid the users in finding their end location
+* Live location of the user might help when clearing a particular checkpoint given in the directions
